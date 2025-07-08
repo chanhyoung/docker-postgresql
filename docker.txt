@@ -1,0 +1,13 @@
+docker network create hodolog-network   # network 생성
+
+docker build -t chlee3927/hodolog-postgres:1.0.0 .  # 빌드
+
+docker push chlee3927/hodolog-postgres:1.0.0  # 빌드한 이미지 push
+
+docker run -d --name hodolog-postgres -p 5432:5432 --network hodolog-network chlee3927/hodolog-postgres:1.0.0  # 컨테이너 실행
+
+docker logs hodolog-postgres
+
+docker exec -it hodolog-postgres su postgres bash -c "psql --username=myuser --dbname=mydb"
+
+docker image history chlee3927/hodolog-postgres:1.0.0
