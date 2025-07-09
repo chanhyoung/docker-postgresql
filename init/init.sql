@@ -1,18 +1,43 @@
+create table users (
+    user_id  bigserial not null, 
+    created_at timestamp, 
+    email varchar(50) not null, 
+    name varchar(50) not null, 
+    password varchar(255) not null, 
+    primary key (user_id)
+)
+
 create table course (
-  id  bigserial not null, 
-  content varchar(60000),
-  course_slug varchar(255), 
-  gymcoding_url varchar(255), 
-  inflearn_url varchar(255), 
-  rating int8, 
-  reviews_count int4 not null, 
-  reviews_url varchar(255), 
-  student_count int4 not null, 
-  subtitle varchar(255), 
-  thumbnail varchar(255), 
-  title varchar(255), 
-  video varchar(255), 
-  primary key (id)
+    course_id  bigserial not null, 
+    content varchar(60000), 
+    course_slug varchar(255), 
+    gymcoding_url varchar(255), 
+    inflearn_url varchar(255), 
+    rating int8, 
+    reviews_count int4 not null, 
+    reviews_url varchar(255), 
+    student_count int4 not null, 
+    subtitle varchar(255), 
+    thumbnail varchar(255), 
+    title varchar(255), 
+    video varchar(255), 
+    primary key (course_id)
+);
+
+create table post (
+    post_id  bigserial not null, 
+    bookmark_count int4 not null, 
+    category varchar(255), 
+    comment_count int4 not null, 
+    content varchar(60000), 
+    created_at timestamp not null, 
+    like_count int4 not null, 
+    read_count int4 not null, 
+    tags text[], 
+    title varchar(255), 
+    updated_at timestamp, 
+    user_id int8 not null, 
+    primary key (post_id)
 );
 
 create table post (
@@ -22,15 +47,8 @@ create table post (
     primary key (id)
 );
 
-create table users (
-  id  bigserial not null, 
-  created_at timestamp, 
-  email varchar(255), 
-  name varchar(255), 
-  password varchar(255), 
-  primary key (id)
-);
-
+alter table users add constraint UK_6dotkott2kjsp8vw4d0m25fb7 unique (email)
+alter table post add constraint FK7ky67sgi7k0ayf22652f7763r foreign key (user_id) references users
 
 INSERT INTO course (course_slug, title, subtitle, thumbnail, video, rating, reviews_count, student_count, reviews_url, inflearn_url, gymcoding_url, content)
 VALUES ('html-css',
