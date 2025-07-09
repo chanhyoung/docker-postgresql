@@ -5,7 +5,7 @@ create table users (
     name varchar(50) not null, 
     password varchar(255) not null, 
     primary key (user_id)
-)
+);
 
 create table course (
     course_id  bigserial not null, 
