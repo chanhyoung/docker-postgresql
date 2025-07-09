@@ -40,13 +40,6 @@ create table post (
     primary key (post_id)
 );
 
-create table post (
-    id  bigserial not null, 
-    content varchar(60000),
-    title varchar(255), 
-    primary key (id)
-);
-
 alter table users add constraint UK_6dotkott2kjsp8vw4d0m25fb7 unique (email)
 alter table post add constraint FK7ky67sgi7k0ayf22652f7763r foreign key (user_id) references users
 
