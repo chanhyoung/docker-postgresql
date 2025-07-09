@@ -40,8 +40,8 @@ create table post (
     primary key (post_id)
 );
 
-alter table users add constraint UK_6dotkott2kjsp8vw4d0m25fb7 unique (email)
-alter table post add constraint FK7ky67sgi7k0ayf22652f7763r foreign key (user_id) references users
+alter table users add constraint UK_6dotkott2kjsp8vw4d0m25fb7 unique (email);
+alter table post add constraint FK7ky67sgi7k0ayf22652f7763r foreign key (user_id) references users;
 
 INSERT INTO course (course_slug, title, subtitle, thumbnail, video, rating, reviews_count, student_count, reviews_url, inflearn_url, gymcoding_url, content)
 VALUES ('html-css',
