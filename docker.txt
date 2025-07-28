@@ -15,3 +15,18 @@ docker exec -it hodolog-postgres sh -c "psql --username=myuser --dbname=mydb"
 
 docker image history chlee3927/hodolog-postgres:1.0.1
 
+
+
+
+## Docker build
+
+docker build -t chlee3927/vite-backend:1.0.0 .
+docker build -t chlee3927/vite-frontend:1.0.0 .
+
+## leafy 실행
+
+```
+docker run -d -p 5432:5432 --name hodolog-postgres -v postgres_data://var/lib/postgresql/data --network hodolog-network chlee3927/hodolog-postgres:1.0.1
+docker run -d -p 8080:8080 -e DB_URL=hodolog-postgres --name vite-backend --network hodolog-network chlee3927/vite-backend:1.0.0
+docker run -d -p 3000:3000 --name vite-frontend --network hodolog-network chlee3927/vite-frontend:1.0.0
+```
