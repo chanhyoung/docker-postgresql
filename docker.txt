@@ -19,14 +19,22 @@ docker image history chlee3927/hodolog-postgres:1.0.1
 
 
 ## Docker build
+docker network create vote-network
+docker network inspect vote-network
 
-docker build -t chlee3927/vite-backend:1.0.0 .
-docker build -t chlee3927/vite-frontend:1.0.0 .
+
+docker build -t chlee3927/vote-postgres:1.0.0 . 
+docker build -t chlee3927/vote-back:1.0.0 .
+docker build -t chlee3927/vote-front:1.0.0 .
+docker build -t chlee3927/vote-nginx:1.0.0 .
 
 ## leafy 실행
 
 ```
-docker run -d -p 5432:5432 --name hodolog-postgres -v postgres_data://var/lib/postgresql/data --network hodolog-network chlee3927/hodolog-postgres:1.0.1
-docker run -d -p 8080:8080 -e DB_URL=hodolog-postgres --name vite-backend --network hodolog-network chlee3927/vite-backend:1.0.0
-docker run -d -p 3000:3000 --name vite-frontend --network hodolog-network chlee3927/vite-frontend:1.0.0
+docker run -d -p 5432:5432 --name vote-postgres -v postgres_data://var/lib/postgresql/data --network vote-network chlee3927/vote-postgres:1.0.0
+docker run -d -p 8080:8080 -e DB_URL=vote-postgres --name vote-back --network vote-network chlee3927/vote-back:1.0.0
+docker run -d -p 3000:3000 --name vote-front --network vote-network chlee3927/vote-front:1.0.0
+docker run -d -p 80:80 --name vote-nginx --network vote-network chlee3927/vote-nginx:1.0.0
 ```
+
+docker exec -it vote-back bin/bash
